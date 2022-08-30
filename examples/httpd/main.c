@@ -29,7 +29,6 @@ void netif_status_callback(struct netif *netif)
 int main() {
     // LWIP network interface
     struct netif netif;
-
     //
     struct netif_rmii_ethernet_config netif_config = {
         pio0, // PIO:            0
@@ -37,7 +36,7 @@ int main() {
         6,    // rx pin start:   6, 7, 8    => RX0, RX1, CRS
         10,   // tx pin start:   10, 11, 12 => TX0, TX1, TX-EN
         14,   // mdio pin start: 14, 15   => ?MDIO, MDC
-        NULL, // MAC address (optional - NULL generates one based on flash id) 
+        NULL, // MAC address (optional - NULL generates one based on flash id)
     };
 
     // change the system clock to use the RMII reference clock from pin 20
@@ -67,6 +66,8 @@ int main() {
     // Start DHCP client and httpd
     dhcp_start(&netif);
     httpd_init();
+
+
 
     // setup core 1 to monitor the RMII ethernet interface
     // this let's core 0 do other things :)
